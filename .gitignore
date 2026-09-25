@@ -36,3 +36,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# 项目自定义忽略目录
+frames/
+output/
