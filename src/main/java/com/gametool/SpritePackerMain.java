@@ -1,7 +1,6 @@
 package com.gametool;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,12 +8,48 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
 
 public class SpritePackerMain {
+
+    public static class SpriteFrame {
+        public String name;
+        public int x;
+        public int y;
+        public int width;
+        public int height;
+
+        public SpriteFrame(String name, int x, int y, int w, int h) {
+            this.name = name;
+            this.x = x;
+            this.y = y;
+            this.width = w;
+            this.height = h;
+        }
+    }
+
+    public static class SpriteData {
+        public List<SpriteFrame> frames;
+    }
+
     public static void main(String[] args) {
+        if(args.length == 0){
+            System.out.println("用法：");
+            System.out.println("打包：-i 输入文件夹 -o 输出文件夹");
+            System.out.println("预览：-p sheet.png sheet.json");
+            return;
+        }
+
+        // 预览模式
+        if(args[0].equals("-p")){
+            String imgPath = args[1];
+            String jsonPath = args[2];
+            SpritePreview.main(new String[]{imgPath, jsonPath});
+            return;
+        }
+
+        //打包模式
         if (args.length <4 || !args[0].equals("-i") || !args[2].equals("-o")){
-            System.out.println("用法：java -jar SpritePacker.jar -i 输入文件夹 -o 输出文件夹");
+            System.out.println("打包用法：java -jar SpritePacker.jar -i 输入文件夹 -o 输出文件夹");
             return;
         }
         String inputDirPath = args[1];
@@ -75,11 +110,17 @@ public class SpritePackerMain {
         }
     }
 
-    // 获取文件夹png文件，并按文件名排序
-    public static List<File> getPngFiles(File dir){
-        File[] files = dir.listFiles((file, name)-> name.endsWith(".png"));
-        if(files == null) return new ArrayList<>();
-        Arrays.sort(files);
-        return Arrays.asList(files);
+    // 获取文件夹内所有png文件
+    private static List<File> getPngFiles(File dir){
+        List<File> list = new ArrayList<>();
+        File[] files = dir.listFiles();
+        if(files == null) return list;
+        for(File f : files){
+            String name = f.getName().toLowerCase();
+            if(name.endsWith(".png")){
+                list.add(f);
+            }
+        }
+        return list;
     }
 }
