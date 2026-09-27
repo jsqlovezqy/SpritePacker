@@ -1,5 +1,6 @@
 ```
 # SpritePacker 像素动画帧打包 & 预览工具（Java Maven）
+> 当前版本：v0.2
 ✨ 一款简单的精灵表打包工具，适合游戏开发，批量把多张像素动画帧合并为精灵表，自带动画预览窗口。
 
 ## ✨功能
@@ -49,6 +50,11 @@ sprite-packer
 精灵表（Sprite Sheet）常用于 2D 像素游戏，把零散动画帧合并成一张大图，减少游戏资源读取开销。
 本项目用 Java Swing 实现预览，适合学习和小游戏开发使用。
 
+## 📜版本记录
+
+- v0.1：基础精灵打包功能，支持横向拼接 png 帧，输出精灵表 sheet.png 和坐标 JSON
+- v0.2：新增 Swing 动画预览窗口，支持精灵表循环播放、画面居中；整合打包 / 预览双入口；补充 README 与.gitignore
+
 ## License
 
-MIT
+MIT License
