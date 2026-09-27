@@ -1,11 +1,11 @@
 ```
-# SpritePacker
-像素动画帧打包 & 预览工具（Java Maven）
+# SpritePacker 像素动画帧打包 & 预览工具（Java Maven）
+✨ 一款简单的精灵表打包工具，适合游戏开发，批量把多张像素动画帧合并为精灵表，自带动画预览窗口。
 
 ## ✨功能
 - 将多张png精灵帧横向合并成一张精灵表（SpriteSheet）
-- 自动生成JSON描述文件，记录每一张小图在大图里的坐标
-- 内置预览窗口，读取精灵表+JSON循环播放动画
+- 自动生成JSON描述文件，记录每一张小图在大图里的坐标、宽高、文件名
+- 内置Swing预览窗口，读取精灵表+JSON循环播放动画，画面自动居中
 
 ## 📋环境要求
 JDK 17+（推荐JDK23），Maven
@@ -32,26 +32,23 @@ java -jar target/sprite-packer-1.0-SNAPSHOT.jar -i frames -o output
 java -jar target/sprite-packer-1.0-SNAPSHOT.jar -p output/sheet.png output/sheet.json
 ```
 
-## 📁目录说明
-
-- frames：放置待打包的 png 图片
-- output：打包输出目录，生成 sheet.png、sheet.json
-
-## 📌开发计划
-
-- 支持多行排版（不只是横向拼接）
-- 拖拽选择图片
-- 可视化调整帧播放速度
+## 📁项目结构
 
 ```
-
-### 关键点说明
-- 代码块必须是 ```bash 开头，单独占一行；结束 ``` 也要单独一行，不能贴在命令同一行
-- 去掉多余的`'''`，你截图里出现了多余三引号，github markdown不识别这个
-
-替换保存好之后，执行这组命令上传：
-```cmd
-git add README.md
-git commit -m "添加项目README文档"
-git push
+sprite-packer
+├── src/main/java/com/gametool
+│   ├── SpritePackerMain.java  # 主入口，打包/预览双模式
+│   └── SpritePreview.java     # Swing动画预览窗口
+├── pom.xml
+├── .gitignore
+└── README.md
 ```
+
+## 📌说明
+
+精灵表（Sprite Sheet）常用于 2D 像素游戏，把零散动画帧合并成一张大图，减少游戏资源读取开销。
+本项目用 Java Swing 实现预览，适合学习和小游戏开发使用。
+
+## License
+
+MIT
